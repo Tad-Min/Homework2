@@ -1,25 +1,32 @@
-/*Name this external file gallery.js*/
+// gallery.js
 
-function upDate(previewPic){
-    /* In this function you should 
-       1) change the url for the background image of the div with the id = "image" 
-       to the source file of the preview image
-       
-       2) Change the text  of the div with the id = "image" 
-       to the alt text of the preview image 
-       */
-        document.getElementById('image').style.backgroundImage = `url('${previewPic.src}')`;
-        document.getElementById('image').innerHTML = previewPic.alt;
-       }
-   
-       function unDo(){
-        /* In this function you should 
-       1) Update the url for the background image of the div with the id = "image" 
-       back to the orginal-image.  You can use the css code to see what that original URL was
-       
-       2) Change the text  of the div with the id = "image" 
-       back to the original text.  You can use the html code to see what that original text was
-       */
-        document.getElementById('image').style.backgroundImage = "url('')";
-        document.getElementById('image').innerHTML = "Hover over an image below to display here.";    
-       }
+// Function to update the displayed image and text.
+function upDate(previewPic) {
+    console.log(`onmouseover or onfocus triggered for: ${previewPic.alt}`);
+    const imageDiv = document.getElementById('image');
+    imageDiv.style.backgroundImage = `url('${previewPic.src}')`;
+    imageDiv.innerHTML = previewPic.alt;
+  }
+  
+  // Function to reset the image and text.
+  function unDo() {
+    console.log('onmouseout or onblur triggered');
+    const imageDiv = document.getElementById('image');
+    imageDiv.style.backgroundImage = "url('')";
+    imageDiv.innerHTML = "Hover over an image below to display it here.";
+  }
+  
+  // Function to set focusable attributes dynamically on page load.
+  function addTabFocus() {
+    console.log('Page loaded. Adding tabindex to all images.');
+    const images = document.querySelectorAll('.preview');
+  
+    // Loop through each image and set the tabindex.
+    for (let img of images) {
+      img.setAttribute('tabindex', '0');
+    }
+  }
+  
+  // Add event listener for the onload event.
+  window.onload = addTabFocus;
+  
